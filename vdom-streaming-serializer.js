@@ -19,11 +19,8 @@ module.exports = function(element){
 			}
 
 			var value = result.value;
-			//console.log(value);
 			var node = value.node;
 			var buffer = value.buffer;
-			//console.log(buffer);
-			//console.log(node);
 			if(node && node[ASYNC]) {
 				// We want to wait on this!
 				promise = node[ASYNC];
