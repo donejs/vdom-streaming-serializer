@@ -36,7 +36,7 @@ describe('vdom-streaming-serializer', function(){
 
 
 
-	var stream = serialize(document.documentElement);
+	var stream = serialize(document);
 
 	stream.setEncoding('utf8');
 
@@ -45,11 +45,11 @@ describe('vdom-streaming-serializer', function(){
 		count++;
 		if (count == 1) {
 			//assert.equal(1,2);
-			assert.equal(html, "<html><body><h1>Hello world</h1><ul>");
+			assert.equal(html, "<#document><html><body><h1>Hello world</h1><ul>");
 		} else if (count == 2) {
 			assert.equal(html, "<li></li></ul><ul>");
 		} else if (count == 3) {
-			assert.equal(html, "<li></li></ul></body></html>");
+			assert.equal(html, "<li></li></ul></body></html></#document>");
 			done();
 		}
 		
