@@ -5,7 +5,8 @@ var makeDocument = require('can-vdom/make-document/make-document');
 var serialize = require('../vdom-streaming-serializer');
 
 describe('vdom-streaming-serializer', function(){
-	it('works', function(done){
+	  it('works', function(done){
+
 		var document = makeDocument();
 
 		var h1 = document.createElement('h1');
@@ -38,7 +39,9 @@ describe('vdom-streaming-serializer', function(){
 		});
 	});
 
+
   	it('wait on aync node', function(done){
+
 		var document = makeDocument();
 
 		var h1 = document.createElement('h1');
@@ -50,13 +53,11 @@ describe('vdom-streaming-serializer', function(){
 
 		var li = document.createElement('li');
 
-
-		// Marking this li as async will force the serialize to wait
 		li[ASYNC] = Promise.resolve().then(function(){
 			var span = document.createElement('span');
 			span.appendChild(document.createTextNode('This is interesting'));
 			li.appendChild(span);
-		})
+		});
 
 		ul.appendChild(li);
 
