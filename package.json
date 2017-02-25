@@ -16,14 +16,11 @@
     "preversion": "npm test && npm run build",
     "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
     "postversion": "git push --tags && git checkout master && git branch -D release && git push",
-    "testee": "testee test/test.html --browsers firefox",
     "test": "mocha test/test.js",
     "jshint": "jshint ./*.js --config",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish",
-    "build": "node build.js",
-    "develop": "done-serve --static --develop --port 8080"
+    "release:major": "npm version major && npm publish"
   },
   "main": "vdom-streaming-serializer.js",
   "keywords": [],
