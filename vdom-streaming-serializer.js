@@ -3,6 +3,9 @@ var Readable = require('stream').Readable;
 var ASYNC = Symbol.for('async-node');
 
 module.exports = function(element){
+	if(element.nodeType === 9) {
+		element = element.firstChild;
+	}
   var stream = new Readable();
 	var generator = serialize(element);
   	stream._read = function(){
@@ -24,12 +27,14 @@ module.exports = function(element){
 };
 
 function* serialize(element){
+
 	if (element.nodeType === 3) {
 		yield {
 			buffer: element.nodeValue
 		};
 		return;
 	}
+
 
 	var buffer = '';
 

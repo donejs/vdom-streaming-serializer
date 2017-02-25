@@ -36,7 +36,7 @@ describe('vdom-streaming-serializer', function(){
 
 
 
-	var stream = serialize(document.documentElement);
+	var stream = serialize(document);
 
 	stream.setEncoding('utf8');
 
