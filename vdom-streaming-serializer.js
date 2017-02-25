@@ -2,7 +2,46 @@ var Readable = require('stream').Readable;
 
 var ASYNC = Symbol.for('async-node');
 
-function* serialize(element){
+function parentSibling(element) {
+	var parent = element.parentNode;
+	if(parent) {
+		if(parent.nextSibling) {
+			return parent.nextSibling;
+		}
+		return parentSibling(parent);
+	}
+}
+
+function* serialize(element) {
+	var buffer = '';
+	while(element) {
+		if(element[ASYNC]) {
+			yield {
+				buffer: buffer,
+				node: element
+			};
+			buffer = '';
+		}
+
+		switch(element.nodeType) {
+			case 3:
+				buffer += element.nodeValue;
+				break;
+			default:
+				var tagName = element.nodeName.toLowerCase();
+
+				buffer += '<' + tagName;
+				// attributes
+				buffer += '>';
+		}
+
+		element = element.firstChild ||
+			element.nextSibling ||
+			parentSibling(element);
+	}
+}
+
+function* serialize2(element){
 	if (element.nodeType === 3) {
 		yield {
 			buffer: element.nodeValue
