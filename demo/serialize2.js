@@ -16,14 +16,11 @@ var li = document.createElement('li');
 
 // Marking this li as async will force the serialize to wait
 li[ASYNC] = Promise.resolve();
-
-
-var span = document.createElement('span');
-span.appendChild(document.createTextNode('This is interesting'));
-li.appendChild(span);
-
 ul.appendChild(li);
 
+var div = document.createElement('div');
+div.setAttribute('foo', 'bar');
+document.body.appendChild(div);
 
 var stream = serialize(document.documentElement);
 

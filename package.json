@@ -1,6 +1,6 @@
 {
   "name": "vdom-streaming-serializer",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "",
   "homepage": "",
   "repository": {
@@ -16,7 +16,8 @@
     "preversion": "npm test && npm run build",
     "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
     "postversion": "git push --tags && git checkout master && git branch -D release && git push",
-    "test": "mocha test/test.js",
+    "test": "npm run jshint && npm run mocha",
+		"mocha": "mocha test/test.js",
     "jshint": "jshint ./*.js --config",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
@@ -26,6 +27,7 @@
   "keywords": [],
   "devDependencies": {
     "can-vdom": "^3.0.1",
+    "jshint": "^2.8.0",
     "mocha": "^3.2.0"
   }
 }
