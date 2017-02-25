@@ -14,6 +14,7 @@ describe('vdom-streaming-serializer', function(){
 	h1.appendChild(document.createTextNode('Hello world'));
 	document.body.appendChild(h1);
 
+
 	var ul = document.createElement('ul');
 	document.body.appendChild(ul);
 
@@ -24,17 +25,37 @@ describe('vdom-streaming-serializer', function(){
 
 	ul.appendChild(li);
 
+
+
+	var ul2 = document.createElement('ul');
+	document.body.appendChild(ul2);
+
+	var li2 = document.createElement('li');
+
+	// Marking this li as async will force the serialize to wait
+	li2[ASYNC] = Promise.resolve();
+
+	ul2.appendChild(li2);
+
+
+
 	var stream = serialize(document.documentElement);
 
 	stream.setEncoding('utf8');
 
 	var count = 0;
 	stream.on('data', function(html){
+		console.log('Chunk', html);
 		count++;
 		if (count == 1) {
 			//assert.equal(1,2);
+			//console.log('this is count'+count);
 			assert.equal(html, "<html><body><h1>Hello world</h1><ul>");
 		} else if (count == 2) {
+			//console.log('this is count '+count);
+			assert.equal(html, "<li></li></ul><ul>");
+		} else if (count == 3) {
+			//console.log('this is count'+count);
 			assert.equal(html, "<li></li></ul></body></html>");
 			done();
 		}
