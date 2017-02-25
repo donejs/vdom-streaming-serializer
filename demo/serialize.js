@@ -19,5 +19,14 @@ li[ASYNC] = Promise.resolve();
 
 ul.appendChild(li);
 
-var test = serialize(document.documentElement);
-console.log(test);
+var stream = serialize(document.documentElement);
+
+stream.setEncoding('utf8');
+
+stream.on('data', function(html){
+	console.log('Chunk', html);
+});
+
+stream.on('end', function(){
+	console.log('Finished');
+});
