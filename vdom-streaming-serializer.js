@@ -5,7 +5,7 @@ var ASYNC = Symbol.for('async-node');
 module.exports = function(element){
   var stream = new Readable();
 	var generator = serialize(element);
-  stream._read = function(){
+  	stream._read = function(){
 		var result = generator.next();
 
 		if(result.done) {
@@ -17,11 +17,7 @@ module.exports = function(element){
 		var node = value.node;
 		var buffer = value.buffer;
 
-		if(node[ASYNC]) {
-			// We want to wait on this!
-			var promise = node[ASYNC];
-		}
-
+		
 		this.push(buffer);
   };
   return stream;
@@ -48,29 +44,29 @@ function* serialize(element){
 
     var child = element.firstChild;
     while(child) {
-			if(child[ASYNC]) {
+		if(child[ASYNC]) {
+			yield {
+				buffer: buffer,
+				node: child
+			};
+			buffer = '';
+		}
+
+		var generator = serialize(child);
+		var result = generator.next();
+
+		while(!result.done) {
+			buffer += result.value.buffer;
+			if(result.value.node && result.value.node[ASYNC]) {
 				yield {
 					buffer: buffer,
-					node: child
+					node: result.value.node
 				};
 				buffer = '';
 			}
 
-			var generator = serialize(child);
-			var result = generator.next();
-
-			while(!result.done) {
-				buffer += result.value.buffer;
-				if(result.value.node && result.value.node[ASYNC]) {
-					yield {
-						buffer: buffer,
-						node: result.value.node
-					};
-					buffer = '';
-				}
-
-				result = generator.next();
-			}
+			result = generator.next();
+		}
 
     	child = child.nextSibling;
     }

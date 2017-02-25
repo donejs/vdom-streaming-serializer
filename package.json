@@ -17,7 +17,7 @@
     "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
     "postversion": "git push --tags && git checkout master && git branch -D release && git push",
     "testee": "testee test/test.html --browsers firefox",
-    "test": "npm run jshint && npm run testee",
+    "test": "mocha test/test.js",
     "jshint": "jshint ./*.js --config",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
@@ -28,6 +28,7 @@
   "main": "vdom-streaming-serializer.js",
   "keywords": [],
   "devDependencies": {
-    "can-vdom": "^3.0.1"
+    "can-vdom": "^3.0.1",
+    "mocha": "^3.2.0"
   }
 }
