@@ -162,7 +162,7 @@ describe('vdom-streaming-serializer', function(){
 				if (count == 1) {
 					assert.equal(html, "<html><body><h1>Hello world</h1><ul>");
 				} else if (count == 2) {
-					assert.equal(html, "<li></li></ul><div foo = 'bar'></div></body></html>");
+					assert.equal(html, "<li></li></ul><div foo=\"bar\"></div></body></html>");
 					done();
 				}
 			});
