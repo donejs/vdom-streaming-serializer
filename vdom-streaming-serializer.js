@@ -51,7 +51,7 @@ function* serialize(element){
 	var attr;
 	for (var i = 0; i < element.attributes.length; i++) {
 		attr = element.attributes[i];
-		buffer += attr
+		buffer += (" "+attr.name+" = "+"'"+attr.value+"'");
 	}
 	buffer += '>';
 
