@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/donejs/vdom-streaming-serializer.png?branch=master)](https://travis-ci.org/donejs/vdom-streaming-serializer)
 
+[![npm version](https://badge.fury.io/js/vdom-streaming-serializer.svg)](https://badge.fury.io/js/vdom-streaming-serializer)
+
 # vdom-streaming-serializer
 
 The vdom-streaming-serializer is a library for serializing virtual DOM objects into chunks of strings that can be written into an HTTP response.
@@ -50,32 +52,3 @@ Upon noticing a child node, the serializer determines whether its child is async
 
 ### Asynchronization
 It handles synchronous and asynchronous elements differently by resolving promise elements if we wish to wait before emitting.
-
-### Standalone use
-
-Load the `global` version of the plugin:
-
-```html
-<script src='./node_modules/vdom-streaming-serializer/dist/global/vdom-streaming-serializer.js'></script>
-```
-
-## Contributing
-
-### Making a Build
-
-To make a build of the distributables into `dist/` in the cloned repository run
-
-```
-npm install
-node build
-```
-
-### Running the tests
-
-
-Tests can run in the browser by opening a webserver and visiting the `test.html` page.
-Automated tests that run the tests from the command line in Firefox can be run with
-
-```
-npm test
-```
