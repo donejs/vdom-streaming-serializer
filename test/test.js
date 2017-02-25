@@ -135,7 +135,7 @@ describe('vdom-streaming-serializer', function(){
 			}
 		});
 	});
-	it('attrib works', function(done){
+	it('streaming attributes works', function(done){
 	    //assert.ok(true, 'It worked');
 
 			var document = makeDocument();
