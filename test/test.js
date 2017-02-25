@@ -105,8 +105,11 @@ describe('vdom-streaming-serializer', function(){
 				var rspan = document.createElement('span');
 				rspan[ASYNC] = Promise.resolve().then(function() {
 					var rrspan = document.createElement('span');
-					rrspan.appendChild(document.createTextNode('This is interesting'));
+					rrspan[ASYNC] = Promise.resolve().then(function() {
+						rrspan.appendChild(document.createTextNode('This is interesting'));
+					})
 					rspan.appendChild(rrspan);
+					
 				});
 				span.appendChild(rspan);
 			});		
@@ -130,9 +133,16 @@ describe('vdom-streaming-serializer', function(){
 				assert.equal(html, "<html><body><h1>Hello world</h1><ul>");
 			} else if (count == 2) {
 				//console.log(html);
-				assert.equal(html, "<li><span><span><span>This is interesting</span></span></span></li></ul></body></html>");
+				assert.equal(html, "<li>");
+			} else if (count == 3) {
+				assert.equal(html, "<span>");
+			} else if (count == 4) {
+				assert.equal(html, "<span>");
+			} else if (count == 5) {
+				assert.equal(html, "<span>This is interesting</span></span></span></li></ul></body></html>");
 				done();
-			}			
+
+			}
 		});
 	});
 
