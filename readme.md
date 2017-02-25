@@ -1,6 +1,6 @@
 # vdom-streaming-serializer
 
-[![Build Status](https://travis-ci.org//vdom-streaming-serializer.png?branch=master)](https://travis-ci.org//vdom-streaming-serializer)
+[![Build Status](https://travis-ci.org/donejs/vdom-streaming-serializer.png?branch=master)](https://travis-ci.org/donejs/vdom-streaming-serializer)
 
 
 
