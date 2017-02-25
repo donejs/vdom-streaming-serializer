@@ -26,5 +26,8 @@
     "develop": "done-serve --static --develop --port 8080"
   },
   "main": "vdom-streaming-serializer.js",
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "can-vdom": "^3.0.1"
+  }
 }
