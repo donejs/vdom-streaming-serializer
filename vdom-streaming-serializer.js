@@ -2,40 +2,7 @@ var Readable = require('stream').Readable;
 
 var ASYNC = Symbol.for('async-node');
 
-module.exports = function(element){
-	if(element.nodeType === 9) {
-		element = element.firstChild;
-	}
-  var stream = new Readable();
-	var generator = serialize(element);
-	var promise = Promise.resolve();
-  	stream._read = function(){
-  		promise.then(function() {
-  			var result = generator.next();
-
-			if(result.done) {
-				this.push(null);
-				return;
-			}
-
-			var value = result.value;
-			var node = value.node;
-			var buffer = value.buffer;
-			if(node && node[ASYNC]) {
-				// We want to wait on this!
-				promise = node[ASYNC];
-			}
-			
-			this.push(buffer);
-
-  		}.bind(this));
-		
-  };
-  return stream;
-};
-
 function* serialize(element){
-
 	if (element.nodeType === 3) {
 		yield {
 			buffer: element.nodeValue
@@ -88,4 +55,36 @@ function* serialize(element){
 	yield {
 		buffer: buffer
 	};
+}
+
+module.exports = function(element){
+	if(element.nodeType === 9) {
+		element = element.firstChild;
+	}
+  var stream = new Readable();
+	var generator = serialize(element);
+	var promise = Promise.resolve();
+  	stream._read = function(){
+  		promise.then(function() {
+  			var result = generator.next();
+
+			if(result.done) {
+				this.push(null);
+				return;
+			}
+
+			var value = result.value;
+			var node = value.node;
+			var buffer = value.buffer;
+			if(node && node[ASYNC]) {
+				// We want to wait on this!
+				promise = node[ASYNC];
+			}
+
+			this.push(buffer);
+
+  		}.bind(this));
+
+  };
+  return stream;
 };
