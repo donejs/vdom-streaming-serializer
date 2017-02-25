@@ -4,7 +4,6 @@ var ASYNC = Symbol.for('async-node');
 
 module.exports = function(element){
 	if(element.nodeType === 9) {
-		console.log("hi");
 		element = element.firstChild;
 	}
   var stream = new Readable();
