@@ -23,7 +23,6 @@ var stream = serialize(document.documentElement);
 
 stream.setEncoding('utf8');
 
-var count = 0;
 stream.on('data', function(html){
 	console.log('Chunk', html);	
 });
