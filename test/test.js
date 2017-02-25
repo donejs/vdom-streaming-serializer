@@ -30,7 +30,6 @@ describe('vdom-streaming-serializer', function(){
 
 	var count = 0;
 	stream.on('data', function(html){
-		console.log('Chunk', html);
 		count++;
 		if (count == 1) {
 			//assert.equal(1,2);
