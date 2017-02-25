@@ -8,20 +8,31 @@ module.exports = function(element){
 	}
   var stream = new Readable();
 	var generator = serialize(element);
+	var promise = Promise.resolve();
   	stream._read = function(){
-		var result = generator.next();
+  		promise.then(function() {
+  			var result = generator.next();
 
-		if(result.done) {
-			this.push(null);
-			return;
-		}
+			if(result.done) {
+				this.push(null);
+				return;
+			}
 
-		var value = result.value;
-		var node = value.node;
-		var buffer = value.buffer;
+			var value = result.value;
+			//console.log(value);
+			var node = value.node;
+			var buffer = value.buffer;
+			//console.log(buffer);
+			//console.log(node);
+			if(node && node[ASYNC]) {
+				// We want to wait on this!
+				promise = node[ASYNC];
+			}
+			
+			this.push(buffer);
 
+  		}.bind(this));
 		
-		this.push(buffer);
   };
   return stream;
 };
