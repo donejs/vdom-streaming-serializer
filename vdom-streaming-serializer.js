@@ -41,7 +41,7 @@ function* serialize(element){
 	buffer += '<' + element.nodeName.toLowerCase();
 
 	var attr;
-	for (var i = 0; i < element.length; i++) {
+	for (var i = 0; i < element.attributes.length; i++) {
 		attr = element.attributes[i];
 		buffer += attr
 	}
