@@ -38,7 +38,7 @@ describe('vdom-streaming-serializer', function(){
 		});
 	});
 
-  it('wait on aync node', function(done){
+  it('wait on async node', function(done){
 		var document = makeDocument();
 
 		var h1 = document.createElement('h1');
