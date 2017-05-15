@@ -3,6 +3,8 @@
 
 # vdom-streaming-serializer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/donejs/vdom-streaming-serializer.svg)](https://greenkeeper.io/)
+
 The vdom-streaming-serializer is a library for serializing virtual DOM objects into chunks of strings that can be written into an HTTP response.
 
 ## Installation
