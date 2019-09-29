@@ -28,6 +28,6 @@
   "devDependencies": {
     "can-vdom": "^3.0.1",
     "jshint": "^2.8.0",
-    "mocha": "^3.2.0"
+    "mocha": "^6.2.1"
   }
 }
